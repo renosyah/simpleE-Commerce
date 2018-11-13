@@ -1,0 +1,34 @@
+[app]
+name = "simple ecommerce"
+version = "0.0.1"
+host = "localhost"
+port = 9000
+
+[database]
+host = "localhost"
+port = 26257
+name = "ecommerce"
+sslmode = "disable"
+username = "root"
+password = ""
+
+[cache]
+host = "localhost"
+port = 6379
+password = ""
+max_idle = 100
+idle_timeout = 5
+enabled = true
+expire_time = 60
+idempotency_expiry = 86400
+
+[template]
+admin_header = "template/admin/admin_header.html"
+admin_footer = "template/admin/admin_footer.html"
+admin_login = "template/admin/admin_login.html"
+admin_home = "template/admin/admin_home.html"
+
+user_header = "template/user/user_header.html"
+user_footer = "template/user/user_footer.html"
+user_home = "template/user/user_home.html"
+user_product_detail = "template/user/user_product_detail.html"

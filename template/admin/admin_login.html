@@ -1,0 +1,53 @@
+{{template "admin_header.html"}}
+<script>
+    $(function(){
+
+    $('#login_button').click(function(){
+
+SendRequest('/admin/handle_login','type=WebBrowser&username='+$('#username').val()+'&password='+$('#password').val(),function(response){
+    $('#username').val('');
+    $('#password').val('');	
+    console.log(response);
+    });
+});
+});
+</script>
+<div id="login_form">
+    <div class="row">
+            <div class="col m6 l4"></div>
+            <div class="col s12 m6 l4">
+            <span class="blue-text text-darken-2">
+                <div class="card-panel">
+                    <div class="row">
+                                <div class="input-field col s12 m12 l12" style="text-align:center">
+                                <h3>Login Admin</h3>
+                            </div>
+                    </div>
+                        <div class="row">
+                                <div class="input-field col s12 m12 l12">
+                                    <input id="username" type="text" placeholder="Input Username">
+                                
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12 m12 l12">
+                                      <input id="password" type="password" placeholder="Password">
+                                
+                                </div>
+                              </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12"  style="text-align:center">
+                            <button id="login_button" class="waves-effect waves-light btn blue darken-1">Login</button>
+                        </div>
+                        <div class="input-field col s12 m12 l12"  style="text-align:center">
+                        </div>
+                    </div>
+                </div>
+            </span>
+            </div>
+            <div class="col m6 l4">
+            </div>
+        </div>
+    </div>
+    </div>
+{{template "admin_footer.html"}}

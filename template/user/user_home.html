@@ -1,0 +1,109 @@
+{{template "user_header.html"}}
+<script>
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  })
+  </script>
+  <div class="fixed-action-btn">
+      <a class="btn-floating btn-large  blue">
+        <i class="large material-icons">shop</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red"><i class="material-icons">payment</i></a></li>
+        <li><a class="btn-floating yellow darken-1"><i class="material-icons">shopping_cart</i></a></li>
+        <li><a class="btn-floating green"><i class="material-icons">share</i></a></li>
+        <li><a class="btn-floating purple"><i class="material-icons">redeem</i></a></li>
+      </ul>
+    </div>
+          
+<div class="row">
+    <div class="col m4 l4 hide-on-small-only">
+        <nav class="white"  style="margin-top:10px">
+
+            <div class="nav-wrapper">
+              <form action="/">
+                <div class="input-field grey-text">
+                  <input id="search" placeholder="Search Product" type="search" name="search_product" required>
+                  <label class="label-icon" for="search"><i class="material-icons blue-text">search</i></label>
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+            </div>
+
+          </nav>
+          <div class="card">
+              <div class="card-content blue-text">
+                  <span class="card-title">Category</span>
+                  <a class="orange-text" href="/" style="font-size: 20px">All</a><br>
+                  {{range .Categories}}
+                  <a class="orange-text" href="/?category={{.IdProductCategory}}" style="font-size: 20px">{{.CategoryName}}</a><br>
+                  {{end}}
+              </div>
+            </div>
+         
+    </div>
+    <div class="col s12 m8 l7">
+
+
+          
+        <div class="hide-on-med-and-up">
+            <nav class="white" style="margin-top:10px">
+
+                <div class="nav-wrapper">
+                  <form action="/">
+                    <div class="input-field grey-text">
+                      <input id="search" placeholder="Search Product" type="search" name="search_product" required>
+                      <label class="label-icon" for="search"><i class="material-icons blue-text">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+                </div>
+    
+              </nav>
+              <div class="card" style="font-size:20px;padding:autoL;text-align: center">
+                  <a class="orange-text" href="/"> All &nbsp</a>
+                  {{range .Categories}}
+                  <a class="orange-text" target="_self" href="/?category={{.IdProductCategory}}">{{.CategoryName}} &nbsp</a>
+                  {{end}}
+                </div>
+        </div>
+
+        {{if not .Products}}
+        <div class="card" style="margin-bottom:200px">
+            <div class="card-content grey-text">
+                <span class="card-title"><p style="text-align:center">Product Not Found!</p></span>
+            </div>
+          </div>
+           {{else}}
+
+        {{range .Products}}
+    
+    <div class="card horizontal">
+      <div class="card-image">
+          {{range $number,$image := .Images}}
+        <a href="/detail_product?id_product={{.IdProduct}}"><img src="{{$image.UrlImage}}" style="margin:auto;max-width:200px;max-height:200px"></a>
+        {{end}}
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <p style="color:black;font-size:25px"><a href="/detail_product?id_product={{.IdProduct}}">{{.ProductName}}</a></p>
+            {{range $number,$detail := .Details}}
+          <p style="color:black">{{$detail.Description}}</p>
+          {{end}}
+        </div>
+        <div class="card-action">
+            <p style="color:green">{{.Curency}} {{.Price}} </p>
+            <a href="#"><i class="material-icons">thumb_up</i></a><a href="#"><i class="material-icons">add_shopping_cart</i></a>
+        </div>
+        
+      </div>
+    </div>
+    {{end}}
+
+    {{end}}
+    
+  </div>
+  <div class="col l1 hide-on-small-only"></div>
+  </div>
+
+{{template "user_footer.html"}}
