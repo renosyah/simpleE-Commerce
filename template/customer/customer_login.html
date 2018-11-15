@@ -1,9 +1,10 @@
 {{template "customer_header.html"}}
 
-<div id="login_form">
     <div class="row">
-            <div class="col m6 l4"></div>
-            <div class="col s12 m6 l4">
+            <div class="col m2 l4"></div>
+            <div class="col s12 m8 l4">
+                <form action="/costumer_login" method="POST">
+                
             <span class="blue-text text-darken-2">
                 <div class="card-panel">
                     <div class="row">
@@ -13,29 +14,30 @@
                     </div>
                         <div class="row">
                                 <div class="input-field col s12 m12 l12">
-                                    <input id="username" type="text" placeholder="Input Username">
+                                    <input id="username" type="text" placeholder="Input Username" name="username">
                                 
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="input-field col s12 m12 l12">
-                                      <input id="password" type="password" placeholder="Password">
+                                      <input id="password" type="password" placeholder="Password" name="password">
                                 
                                 </div>
                               </div>
                     <div class="row">
                         <div class="input-field col s12 m12 l12"  style="text-align:center">
-                            <button id="login_button" class="waves-effect waves-light btn blue darken-1">Login</button>
+                            <button id="login_button" class="waves-effect waves-light btn blue darken-1" type="submit">Login</button>
                         </div>
                         <div class="input-field col s12 m12 l12"  style="text-align:center">
+                            <a href="/register">Register</a>
                         </div>
                     </div>
                 </div>
             </span>
+
+        </form>
             </div>
-            <div class="col m6 l4">
+            <div class="col m2 l4">
             </div>
         </div>
-    </div>
-    </div>
 {{template "customer_footer.html"}}

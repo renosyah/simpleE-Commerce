@@ -42,9 +42,9 @@ func CustomerHome(res http.ResponseWriter, req *http.Request) {
 		fmt.Println("%r", err)
 	}
 
-	id_costumer, err := strconv.ParseInt(GetCookie("user_session", req), 10, 64)
+	id_costumer, err := strconv.ParseInt(GetCookie(costumer_session, req), 10, 64)
 	if err != nil {
-		id_costumer = 0
+		//fmt.Println("%r", err)
 	}
 
 	u := &model.Costumer{IdCostumer: id_costumer}
@@ -85,9 +85,9 @@ func ProductDetail(res http.ResponseWriter, req *http.Request) {
 		fmt.Println("%r", err)
 	}
 
-	id_costumer, err := strconv.ParseInt(GetCookie("user_session", req), 10, 64)
+	id_costumer, err := strconv.ParseInt(GetCookie(costumer_session, req), 10, 64)
 	if err != nil {
-		id_costumer = 0
+		//fmt.Println("%r", err)
 	}
 
 	u := &model.Costumer{IdCostumer: id_costumer}

@@ -38,8 +38,14 @@ var rootCmd = &cobra.Command{
 
 		r.HandleFunc("/", router.CustomerHome)
 		r.HandleFunc("/detail_product", router.ProductDetail)
+
 		r.HandleFunc("/login", router.CustomerLogin)
+		r.HandleFunc("/costumer_login", router.HandleCustomerLogin)
+
 		r.HandleFunc("/register", router.CustomerRegister)
+		r.HandleFunc("/costumer_register", router.HandleCustomerRegister)
+
+		r.HandleFunc("/costumer_logout", router.HandleCustomerLogout)
 
 		r.HandleFunc("/admin/login", router.AdminLoginPage)
 		r.HandleFunc("/admin/handle_login", router.HandleAdminLogin)

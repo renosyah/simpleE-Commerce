@@ -1,7 +1,14 @@
 {{template "customer_header.html"}}
 <script>
+  
   $(document).ready(function(){
+    $('.modal').modal();
+
+    $("#account_bar").text("{{if .Costumer.Name}}{{.Costumer.Name}} (Logout){{else}}Login{{end}}");
+    $("#account_bar").attr("href","{{if not .Costumer.Name}}/login{{else}}/costumer_logout{{end}}");
+
     $('.fixed-action-btn').floatingActionButton();
+
   })
   </script>
   <div class="fixed-action-btn">
@@ -93,7 +100,8 @@
         </div>
         <div class="card-action">
             <p style="color:green">{{.Curency}} {{.Price}} </p>
-            <a href="#"><i class="material-icons">thumb_up</i></a><a href="#"><i class="material-icons">add_shopping_cart</i></a>
+            <a href="#"><i class="material-icons">thumb_up</i></a>
+            <a href="#"><i class="material-icons modal-trigger">add_shopping_cart</i></a>
         </div>
         
       </div>

@@ -10,6 +10,9 @@ var cookiehandler = securecookie.New(
 	securecookie.GenerateRandomKey(64),
 	securecookie.GenerateRandomKey(32))
 
+const costumer_session = "COSTUMER_SESSION"
+const admin_session = "ADMIN_SESSION"
+
 func SetCookie(cookie_name string, cookie_value string, res http.ResponseWriter) {
 	value := map[string]string{
 		"name": cookie_value,

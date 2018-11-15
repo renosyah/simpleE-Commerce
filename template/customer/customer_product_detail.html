@@ -1,5 +1,12 @@
 {{template "customer_header.html"}}
-
+<script>
+  
+    $(document).ready(function(){
+      $("#account_bar").text("{{if .Costumer.Name}}{{.Costumer.Name}} (Logout){{else}}Login{{end}}");
+      $("#account_bar").attr("href","{{if not .Costumer.Name}}/login{{else}}/costumer_logout{{end}}");
+    })
+    
+</script>  
     <div class="row">
         <div class="col m3 l3"></div>
         <div class="col s12 m6 l6">
