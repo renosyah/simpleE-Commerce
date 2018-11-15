@@ -56,8 +56,20 @@ CREATE TABLE ecommerce.product_image (
 INSERT INTO ecommerce.product_image (id_product,url_image) VALUES (48535335211,'data/wardrop.jpeg'),(4857343545453,'data/burger.png'),(48573573957353,'data/kaos.jpeg');
 INSERT INTO ecommerce.product_image (id_product,url_image) VALUES (7766554411,'data/dinner_table.jpg'),(1121415151331,'data/nugget.jpg'),(443235688776554,'data/jeans.jpeg');
 
+
+CREATE TABLE ecommerce.costumer (
+	id_costumer SERIAL,
+	name STRING,
+	address STRING,
+	email STRING,
+	username STRING,
+	password STRING,
+	PRIMARY KEY (id_costumer)
+);
+
 CREATE TABLE ecommerce.order (
 	id_order SERIAL,
+	id_costumer INT64 NULL REFERENCES ecommerce.costumer (id_costumer),
 	order_date TIMESTAMP,
 	total INT,
 	PRIMARY KEY (id_order)
@@ -72,3 +84,26 @@ CREATE TABLE ecommerce.detail_order (
 	PRIMARY KEY (id_detail_order)
 );
 
+CREATE TABLE ecommerce.shipping (
+	id_shipping SERIAL,
+	id_order INT64 NULL REFERENCES ecommerce.order (id_order),
+	shipping_fee INT,
+	shiping_address STRING,
+	PRIMARY KEY (id_shipping)
+);
+
+CREATE TABLE ecommerce.cart (
+	id_cart SERIAL,
+	id_costumer INT64 NULL REFERENCES ecommerce.costumer (id_costumer),
+	total INT,
+	PRIMARY KEY (id_cart)
+);
+
+CREATE TABLE ecommerce.detail_cart (
+	id_detail_cart SERIAL,
+	id_cart INT64 NULL REFERENCES ecommerce.cart (id_cart),
+	id_product INT64 NULL REFERENCES ecommerce.product (id_product),
+	quantity INT,
+	sub_total INT,
+	PRIMARY KEY (id_detail_cart)
+);

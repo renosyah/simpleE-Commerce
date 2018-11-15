@@ -1,4 +1,4 @@
-package handler
+package router
 
 import (
 	"encoding/json"
@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/gorilla/securecookie"
 	"github.com/renosyah/simpleE-Commerce/model"
 	"github.com/spf13/viper"
 )
@@ -20,10 +19,6 @@ func AdminLoginPage(res http.ResponseWriter, req *http.Request) {
 	template.Execute(res, nil)
 }
 
-var cookiehandler = securecookie.New(
-	securecookie.GenerateRandomKey(64),
-	securecookie.GenerateRandomKey(32))
-
 func HandleAdminLogin(res http.ResponseWriter, req *http.Request) {
 	admin := model.AdminStruct{
 		Username: req.FormValue("username"),
@@ -33,17 +28,7 @@ func HandleAdminLogin(res http.ResponseWriter, req *http.Request) {
 	result, err := admin.Login(dbPool)
 
 	if err == nil {
-		value := map[string]int64{
-			"name": result.IdAdmin,
-		}
-		if encoded, err := cookiehandler.Encode("session", value); err == nil {
-			cookie_ku := &http.Cookie{
-				Name:  "session",
-				Value: encoded,
-				Path:  "/",
-			}
-			http.SetCookie(res, cookie_ku)
-		}
+		SetCookie("admin_session", fmt.Sprint("", result.IdAdmin), res)
 	}
 
 	if err != nil {

@@ -13,41 +13,38 @@ import (
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 	homedir "github.com/mitchellh/go-homedir"
-	"github.com/renosyah/simpleE-Commerce/handler"
+
+	"github.com/renosyah/simpleE-Commerce/router"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
-
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-}
 
 var (
 	cfgFile   string
 	dbPool    *sql.DB
 	cachePool *redis.Pool
 )
+
 var rootCmd = &cobra.Command{
 	Use: "simple Ecommerce",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		initDB()
 
-		handler.Init(dbPool, cachePool)
+		router.Init(dbPool, cachePool)
 
 		r := mux.NewRouter()
 		http.Handle("/", r)
 
-		r.HandleFunc("/", handler.UserHome)
-		r.HandleFunc("/detail_product", handler.ProductDetail)
+		r.HandleFunc("/", router.CustomerHome)
+		r.HandleFunc("/detail_product", router.ProductDetail)
+		r.HandleFunc("/login", router.CustomerLogin)
+		r.HandleFunc("/register", router.CustomerRegister)
 
-		r.HandleFunc("/admin/login", handler.AdminLoginPage)
-		r.HandleFunc("/admin/handle_login", handler.HandleAdminLogin)
+		r.HandleFunc("/admin/login", router.AdminLoginPage)
+		r.HandleFunc("/admin/handle_login", router.HandleAdminLogin)
 
-		r.HandleFunc("/admin/home", handler.AdminHomePage)
+		r.HandleFunc("/admin/home", router.AdminHomePage)
 
 		http.Handle("/data/", http.StripPrefix("/data/", http.FileServer(http.Dir("data"))))
 		http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
@@ -56,6 +53,13 @@ var rootCmd = &cobra.Command{
 
 		http.ListenAndServe(fmt.Sprintf(":%d", viper.GetInt("app.port")), nil)
 	},
+}
+
+func Execute() {
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
 
 func init() {
