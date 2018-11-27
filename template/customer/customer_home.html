@@ -9,7 +9,7 @@
 
     $('.fixed-action-btn').floatingActionButton();
 
-  })
+  });
   </script>
   <div class="fixed-action-btn">
       <a class="btn-floating btn-large  blue">
@@ -101,7 +101,17 @@
         <div class="card-action">
             <p style="color:green">{{.Curency}} {{.Price}} </p>
             <a href="#"><i class="material-icons">thumb_up</i></a>
-            <a href="#"><i class="material-icons modal-trigger">add_shopping_cart</i></a>
+            <a id="add_{{.IdProduct}}_to_cart" href="#"><i class="material-icons modal-trigger">add_shopping_cart</i></a>
+            <script>
+              $(document).ready(function(){
+
+                $("#add_{{.IdProduct}}_to_cart").click(function(){
+
+                });
+
+
+              });
+            </script>
         </div>
         
       </div>
